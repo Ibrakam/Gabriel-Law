@@ -18,36 +18,59 @@ def choose_language():
     return keyboard
 
 
+def languages():
+    kb = [
+        [KeyboardButton(text="🇺🇸 English"),
+         KeyboardButton(text="🇷🇺 Русский"),
+         KeyboardButton(text="🇪🇸 Español")],
+        [KeyboardButton(text="🇺🇿 O'zbekcha"),  # Узбекский
+         KeyboardButton(text="🇺🇦 Українська"),  # Украинский
+         KeyboardButton(text="🇰🇿 Қазақ")],  # Казахский],
+         [KeyboardButton(text="🇰🇬 Кыргызча"),  # Киргизский
+          KeyboardButton(text="🇹🇯 Тоҷикӣ"),  # Таджикский
+          KeyboardButton(text="🇦🇲 Հայերեն")],  # Армянский],
+          [KeyboardButton(text="🇬🇪 ქართული"),  # Грузинский
+           KeyboardButton(text="🇧🇾 Беларуская"),  # Белорусский
+           KeyboardButton(text="🇦🇿 Azərbaycanca"),  # Азербайджанский
+           ]
+    ]
+
+    keyboard = ReplyKeyboardMarkup(
+        keyboard=kb,
+        resize_keyboard=True
+    )
+    return keyboard
+
 def services_kb(tg_id):
     button_rus = [
-        [InlineKeyboardButton(text="🌐О нас", callback_data='qwer'),
-         InlineKeyboardButton(text="☎️Контакты", callback_data='qwer')],
-        [InlineKeyboardButton(text="🗺Практические области", callback_data='qwer'),
-         InlineKeyboardButton(text="🚘ДТП", callback_data='qwer')],
-        [InlineKeyboardButton(text="🌎Области, которые мы обслуживаем", callback_data='qwer'),
-         InlineKeyboardButton(text="🗂Результаты", web_app=web)],
-        [InlineKeyboardButton(text="📝Консультации", callback_data='consulting')],
+
+            [InlineKeyboardButton(text="Связь с юристом \U0001F464", callback_data="qwer")],
+            [InlineKeyboardButton(text="Обратиться за помощью \U0001F917", callback_data="qwer")],
+            [InlineKeyboardButton(text="Задать вопрос \U0001F914", callback_data="consulting")],
+            [InlineKeyboardButton(text="Перейти на сайт \U0001F4BB", callback_data="qwer")],
+            [InlineKeyboardButton(text="Результаты \U0001F4CA", web_app=web)],
+            [InlineKeyboardButton(text="Область, которую мы ведем \U0001F4DD", callback_data="qwer")],
+            [InlineKeyboardButton(text="Наши контакты \U0001F4DE", callback_data="qwer")]
 
     ]
     button_esp = [
-        [InlineKeyboardButton(text="🌐Nosotros", callback_data='qwer'),
-         InlineKeyboardButton(text="☎️Contactos", callback_data='qwer')],
-        [InlineKeyboardButton(text="🗺Areas de práctica", callback_data='qwer'),
-         InlineKeyboardButton(text="🚘Accidentes de coche", callback_data='qwer')],
-        [InlineKeyboardButton(text="🌎Zonas que nos atienden", callback_data='qwer'),
-         InlineKeyboardButton(text="🗂Resultados", web_app=web)],
-        [InlineKeyboardButton(text="📝Consultas", callback_data='consulting')],
+        [InlineKeyboardButton(text="Contactar con un abogado \U0001F464", callback_data="qwer")],
+        [InlineKeyboardButton(text="Pedir ayuda \U0001F917", callback_data="qwer")],
+        [InlineKeyboardButton(text="Hacer una pregunta \U0001F914", callback_data="consulting")],
+        [InlineKeyboardButton(text="Ir al sitio web \U0001F4BB", callback_data="qwer")],
+        [InlineKeyboardButton(text="Resultados \U0001F4CA", web_app=web)],
+        [InlineKeyboardButton(text="Nuestras áreas de práctica \U0001F4DD", callback_data="qwer")],
+        [InlineKeyboardButton(text="Nuestros contactos \U0001F4DE", callback_data="qwer")]
+
     ]
     button = [
-        [InlineKeyboardButton(text="🌐About", callback_data='qwer'),
-         InlineKeyboardButton(text="☎️Contacts", callback_data='qwer')
-         ],
-        [InlineKeyboardButton(text="🗺Practice Areas", callback_data='qwer'),
-         InlineKeyboardButton(text="🚘Car Accidents", callback_data='qwer')
-         ],
-        [InlineKeyboardButton(text="🌎Areas We Serve", callback_data='qwer'),
-         InlineKeyboardButton(text="🗂Results", web_app=web)],
-        [InlineKeyboardButton(text="📝Consulting", callback_data='consulting')],
+        [InlineKeyboardButton(text="Contact a lawyer \U0001F464", callback_data="qwer")],
+        [InlineKeyboardButton(text="Ask for help \U0001F917", callback_data="qwer")],
+        [InlineKeyboardButton(text="Ask a question \U0001F914", callback_data="consulting")],
+        [InlineKeyboardButton(text="Go to website \U0001F4BB", callback_data="qwer")],
+        [InlineKeyboardButton(text="Results \U0001F4CA", web_app=web)],
+        [InlineKeyboardButton(text="Our practice areas \U0001F4DD", callback_data="qwer")],
+        [InlineKeyboardButton(text="Our contacts \U0001F4DE", callback_data="qwer")]
     ]
     if db.get_user_language(tg_id) == 'Eng':
         keyboard = InlineKeyboardMarkup(

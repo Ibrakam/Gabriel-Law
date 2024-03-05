@@ -5,7 +5,7 @@ from aiogram import Router, F, types
 from aiogram.filters import Command, CommandStart
 from aiogram.types import InputFile, WebAppInfo
 
-from bot.markup.keyboards import choose_language, services_kb, ph_num_kb, back_kb, end_chat
+from bot.markup.keyboards import choose_language, services_kb, ph_num_kb, back_kb, end_chat, languages
 from aiogram.fsm.context import FSMContext
 from bot.services.States import Form
 from bot.database import Database
@@ -33,10 +33,13 @@ async def bot_start(message: types.Message, state: FSMContext):
     user_id = message.from_user.id
     if data.check_user(user_id):
         if data.get_user_language(user_id) == 'Eng':
+            await message.answer('Hi', reply_markup=languages())
             await message.answer_photo(photo=local, caption='List of services', reply_markup=services_kb(user_id))
         elif data.get_user_language(user_id) == 'Rus':
+            await message.answer('Привет', reply_markup=languages())
             await message.answer_photo(photo=local, caption='Список услуг', reply_markup=services_kb(user_id))
         elif data.get_user_language(user_id) == 'Esp':
+            await message.answer('Hola', reply_markup=languages())
             await message.answer_photo(photo=local, caption='Lista de servicios', reply_markup=services_kb(user_id))
     else:
         await message.answer_photo(photo=local, caption='''<b>Hello! Welcome to Gabriel Law Insurance Company! 🛡️\nWe are glad to see you here!</b>
@@ -44,7 +47,7 @@ async def bot_start(message: types.Message, state: FSMContext):
 <b>Привет! Добро пожаловать в компанию страхования Gabriel Law! 🛡️\nМы рады видеть вас здесь!</b>
 
 <b>¡Hola! ¡Bienvenido a la compañía de seguros Gabriel Law! 🛡️\n¡Nos alegra verte aquí!</b>
-    ''', reply_markup=choose_language(), parse_mode='HTML')
+    ''', reply_markup=languages(), parse_mode='HTML')
     await state.set_state(Form.waiting_for_lang)
 
 
@@ -81,7 +84,7 @@ async def choose_lang(message: types.Message, state: FSMContext):
 async def get_name(message: types.Message, state: FSMContext):
     if users[message.from_user.id] == 'Eng':
         data.add_user(message.from_user.id, message.text, 'Eng', None)
-        await message.answer('List of services', reply_markup=services_kb(message.from_user.id))
+        await message.answer(photo=local, caption='List of services', reply_markup=services_kb(message.from_user.id))
         print(data.get_all_users())
     elif users[message.from_user.id] == 'Rus':
         data.add_user(message.from_user.id, message.text, 'Rus', None)
@@ -115,11 +118,11 @@ async def call_services(call: types.CallbackQuery, state: FSMContext):
             await call.message.edit_caption(caption='Lista de servicios', reply_markup=services_kb(user_id))
     elif call.data == 'back1':
         if data.get_user_language(user_id) == 'Eng':
-            await call.message.answer(caption='List of services', reply_markup=services_kb(user_id))
+            await call.message.answer_photo(photo=local, caption='List of services', reply_markup=services_kb(user_id))
         elif data.get_user_language(user_id) == 'Rus':
-            await call.message.answer(caption='Список услуг', reply_markup=services_kb(user_id))
+            await call.message.answer_photo(photo=local, caption='Список услуг', reply_markup=services_kb(user_id))
         elif data.get_user_language(user_id) == 'Esp':
-            await call.message.answer(caption='Lista de servicios', reply_markup=services_kb(user_id))
+            await call.message.answer_photo(photo=local, caption='Lista de servicios', reply_markup=services_kb(user_id))
 
 
 @router.message(Form.waiting_for_phone)
